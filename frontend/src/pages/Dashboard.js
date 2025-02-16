@@ -86,7 +86,7 @@ import apiService from '../services/api';
       <Grid container spacing={3}>
         {exams?.length > 0 ? (
           exams.map((exam) => (
-            <Grid item xs={12} md={6} lg={4} key={exam.id}>
+            <Grid item xs={12} md={6} lg={6} key={exam.id}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom sx={{ fontSize: 30, fontWeight: 'bold' }}>
@@ -119,7 +119,7 @@ import apiService from '../services/api';
                           sx={{ height: 8, borderRadius: 4, marginTop: '4px' }}
                         />
                       )}
-                      {exam.isFinished && (
+                      {(
                         <Box
                           sx={{
                             backgroundColor: '#e3f2fd',
@@ -160,7 +160,7 @@ import apiService from '../services/api';
                       size="small"
                       color={exam.isFinished ? 'secondary' : 'primary'}
                       onClick={() => {
-                        if (exam.isFinished) {
+                        if (true) {
                           if (window.confirm(`Are you sure you want to retake ${exam.title}?`)) {
                             navigate(`/take-exam/${exam.id}`);
                           }
