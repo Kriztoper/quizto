@@ -5,6 +5,6 @@
 4. **[Frontend]** Install dependencies: `npm install`
 5. **[Frontend]** Start the frontend application: `npm start`
 6. **[Database]** Install PostgreSQL
-7. **[Database]** Create database: `createdb quizto`
+7. **[Database]** Create database: `CREATE DATABASE quizto` or `createdb quizto`
 8. **[Backend]** Navigate to backend directory: `cd ../backend`
 9. **[Backend]** Start the backend application: `./mvnw spring-boot:run`
