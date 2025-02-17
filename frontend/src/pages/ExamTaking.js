@@ -51,8 +51,13 @@ const ExamTaking = () => {
       message: 'Exam submitted successfully!',
       severity: 'success'
     });
-    navigate('/dashboard');
-    window.location.reload();
+
+    // Delay the navigation to the dashboard to give time for Snackbar to display
+    setTimeout(() => {
+      navigate('/dashboard');
+      window.location.reload();
+    },5000) // 5 seconds delay
+    
   };
 
   if (!exam) {
@@ -119,6 +124,7 @@ const ExamTaking = () => {
         open={snackbar.open}
         autoHideDuration={6000}
         onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert
           onClose={() => setSnackbar({ ...snackbar, open: false })}
