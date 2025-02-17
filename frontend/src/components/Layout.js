@@ -9,11 +9,14 @@ const Layout = ({ children }) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            QuizTo
-          </Typography>
-          {isAuthenticated && <Navigation />}
+        <Toolbar 
+          style={{display: 'flex', 
+              justifyContent: 'space-between' , 
+              alignItems: 'center',
+              backgroundImage: 'linear-gradient(45deg, #008000, #800000)',
+              color: 'white',}}>
+          <img src="quizto.png" alt="My Image" style={{width: '70px'}}/>
+          {isAuthenticated && <Navigation/>} 
         </Toolbar>
       </AppBar>
       <Container component="main" sx={{ mt: 4, mb: 4, flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -25,9 +28,9 @@ const Layout = ({ children }) => {
           children
         )}
       </Container>
-      <Box component="footer" sx={{ py: 3, bgcolor: 'background.paper' }}>
+      <Box component="footer" sx={{ py: 2, bgcolor: 'maroon' }}>
         <Container maxWidth="sm">
-          <Typography variant="body2" color="text.secondary" align="center">
+          <Typography variant="body2" color="white" align="center" fontWeight="bold">
             © {new Date().getFullYear()} QuizTo. All rights reserved.
           </Typography>
         </Container>
