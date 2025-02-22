@@ -66,19 +66,40 @@ public class ExamService {
         List<ExamResponse> exams = examRepository.findAll().stream()
                 .map(this::mapToExamResponse)
                 .collect(Collectors.toList());
+
         List<Long> examIds = exams.stream()
                 .map(ExamResponse::getId)
                 .collect(Collectors.toList());
 
         List<Submission> submissions = submissionRepository.findAllByUserIdAndExamIdIn(userId, examIds);
-        exams.forEach(e -> e.setScore(submissions.stream()
-                .filter(s -> s.getExam().getId() == e.getId())
-                .sorted(Comparator.comparing(Submission::getSubmittedAt).reversed())
-                .findFirst()
-                .map(Submission::getScore)
-                .orElse(0)
-        ));
+        exams.forEach(exam -> {
+                exam.setScore(
+                        submissions.stream()
+                                .filter(s -> s.getExam().getId() == exam.getId())
+                                .sorted(Comparator.comparing(Submission::getSubmittedAt).reversed())
+                                .findFirst()
+                                .map(Submission::getScore)
+                                .orElse(0)
+                );
+                exam.setSubmittedAt(
+                        submissions.stream()
+                                .filter(submission -> submission.getExam().getId() == exam.getId() 
+                                        && submission.getUser().getId() == userId)
+                                .findFirst()
+                                .map(Submission::getSubmittedAt)
+                                .orElse(null)
+                );
+                exam.setTotalQuestions(
+                        exam.getQuestions().size()
+                );
+        });
         return exams;
+    }
+    //Retrieve the total number of questions in a given exam
+    public Integer getQuestionCount(Long examId) {
+        var exam = examRepository.findById(examId)
+                .orElseThrow(()-> new EntityNotFoundException("Exam not found"));
+                return exam.getQuestions().size();
     }
 
     public ExamResponse getExam(Long id) {
@@ -108,6 +129,7 @@ public class ExamService {
                 score++;
             }
         }
+
 
         // Create and save submission
         var submission = Submission.builder()
@@ -199,6 +221,7 @@ public class ExamService {
                 .startTime(exam.getStartTime())
                 .endTime(exam.getEndTime())
                 .proctorUsername(exam.getProctor().getUsername())
+                .totalQuestions(exam.getQuestions().size())
                 .questions(exam.getQuestions().stream()
                         .map(q -> ExamResponse.QuestionDTO.builder()
                                 .id(q.getId())

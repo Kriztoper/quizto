@@ -35,6 +35,11 @@ public class ExamController {
     public ResponseEntity<ExamResponse> getExam(@PathVariable Long id) {
         return ResponseEntity.ok(examService.getExam(id));
     }
+    
+    @GetMapping("/{id}/question-count")
+    public ResponseEntity<Integer> getQuestionCount(@PathVariable Long id) {
+        return ResponseEntity.ok(examService.getQuestionCount(id));
+    }
 
     @PostMapping("/{id}/submit")
     @PreAuthorize("hasRole('STUDENT')")

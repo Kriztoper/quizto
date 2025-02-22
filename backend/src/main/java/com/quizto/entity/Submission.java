@@ -30,6 +30,7 @@ public class Submission {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @ElementCollection
     @CollectionTable(name = "submission_answers",
             joinColumns = @JoinColumn(name = "submission_id"))
@@ -39,4 +40,7 @@ public class Submission {
 
     private Integer score;
     private LocalDateTime submittedAt;
+
 }
+
+    

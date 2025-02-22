@@ -15,5 +15,6 @@ public class SubmissionResponse {
     private Long examId;
     private String examTitle;
     private Integer score;
+    private Integer totalQuestions;
     private LocalDateTime submittedAt;
 }
