@@ -17,6 +17,7 @@ import {
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { fetchExamsStart, fetchExamsSuccess, fetchExamsFailure } from '../store/slices/examSlice';
 import apiService from '../services/api';
+import { lightGreen } from '@mui/material/colors';
 
         const Dashboard = () => {
           const navigate = useNavigate();
@@ -57,7 +58,7 @@ import apiService from '../services/api';
           };
 
           return (
-            <Box>
+            <Box sx={{width: '100%'}}>
               {loading && (
                 <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
                   <CircularProgress />
@@ -72,7 +73,7 @@ import apiService from '../services/api';
             </Snackbar>
           )}
 
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ mb: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center',}}>
         <Typography variant="h4">
           {isProctor ? 'Manage Exams' : 'Available Exams'}
         </Typography>
@@ -81,9 +82,9 @@ import apiService from '../services/api';
             Create New Exam
           </Button>
         )}
-      </Box>
+      </div>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={2} sx={{width: '500px', backgroundImage: '#f1f8e9en'}}>
         {exams?.length > 0 ? (
           exams.map((exam) => (
             <Grid item xs={12} md={6} lg={6} key={exam.id}>
