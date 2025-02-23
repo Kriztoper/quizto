@@ -85,7 +85,7 @@ public class ExamService {
                         submissions.stream()
                                 .filter(submission -> submission.getExam().getId() == exam.getId() 
                                         && submission.getUser().getId() == userId)
-                                .findFirst()
+                                .max(Comparator.comparing(Submission::getSubmittedAt)) //Get the latest submission
                                 .map(Submission::getSubmittedAt)
                                 .orElse(null)
                 );

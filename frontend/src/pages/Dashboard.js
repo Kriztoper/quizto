@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Timeago from 'react-timeago';
 import {
   Box,
   Button,
@@ -24,26 +25,6 @@ const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
   const { exams, loading } = useSelector((state) => state.exam);
   const [error, setError] = useState(null);
-
-
-  useEffect(() => {
-    const loadExams = async () => {
-      if (!user?.id) return;
-  
-      dispatch(fetchExamsStart());
-      try {
-        const response = await apiService.getExams(user.id);
-        console.log("API Response:", response.data); // ✅ Check if submittedAt exists
-        dispatch(fetchExamsSuccess(response.data));
-      } catch (error) {
-        const errorMessage = error.response?.data?.message || error.message || 'Failed to load exams';
-        dispatch(fetchExamsFailure(errorMessage));
-      }
-    };
-  
-    loadExams();
-  }, [dispatch, user?.id]);  
-
 
   useEffect(() => {
     const loadExams = async () => {
@@ -161,7 +142,7 @@ const Dashboard = () => {
                         }}
                       >
                         <Typography variant="h6" sx={{ fontSize: '12px', color: '#1976d2' }}>
-                          Took the {exam.title} exam {getTimeAgo(exam.submittedAt)}
+                          Took the {exam.title} exam <Timeago date={exam.submittedAt}/>
                         </Typography>
                         <Typography variant="body1" sx={{ fontSize: 16, marginTop: '5px', color: 'black' }}>
                           Your score is: <strong>{exam.score} / {exam.totalQuestions}</strong>

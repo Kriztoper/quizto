@@ -3,3 +3,4 @@ frontend/node_modules/
 *.class
 
 backend/target/
+node_modules/
