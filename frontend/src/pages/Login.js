@@ -74,18 +74,38 @@ const Login = () => {
   return (
     <Box
       sx={{
+        //position: 'fixed',
+        width: '100vw',
+        height: '100vh',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '80vh',
+        background: 'linear-gradient(to bottom, #7b1113, #1b5e20)',
+        overflow: 'hidden',
       }}
     >
-      <Paper sx={{ p: 4, width: '100%', maxWidth: 400 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+
+      <Paper 
+        elevation={10}
+        
+        sx={{ p: 5, width: '90%', maxWidth: 400, backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 255, 255, 0.15)', borderRadius: 3, 
+              textAlign: 'center', boxShadow: '0px 10px 30px rgba (0, 0, 0, 0, 0.2)', flexDirection: 'column',
+        }}>
+
+        <Typography variant="h4" align="center" gutterBottom
+          sx={{color: 'white', fontWeight: 'bold', mb: 2}}
+        >
+          
           QuizTo
         </Typography>
 
-        <Tabs value={tab} onChange={handleTabChange} centered sx={{ mb: 3 }}>
+        <Tabs value={tab} onChange={handleTabChange} indicatorColor='primary' textColor='inherit' centered sx={{ mb: 3,
+          '& .MuiTab-indicator': { backgroundColor: 'green'},
+          '& .MuiTab-root': {color: 'white', fontWeightL: 'bold'}, //{ color: '#1b5e20', fontWeight: 'bold'},
+          '& .Mui-selected': {color: '#FFC107', borderBottom: '2px solid #FFC107'}, //color: '#7b1113', borderBottom: '2px solid #7b1113'},
+         }}>
+
           <Tab label="Login" />
           <Tab label="Register" />
         </Tabs>
@@ -105,6 +125,13 @@ const Login = () => {
             onChange={handleChange}
             margin="normal"
             required
+            InputProps={{
+              sx: {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: 2,
+                '&:hover': {backgroundColor: 'rgba(255, 255, 255, 0.3)'}
+              }
+            }}
           />
 
           {tab === 1 && (
@@ -117,6 +144,13 @@ const Login = () => {
               onChange={handleChange}
               margin="normal"
               required
+              inputProps={{
+                sx: {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: 2,
+                '&:hover': {backgroundColor: 'rgba(255, 255, 255, 0.3)'}
+                }
+              }}
             />
           )}
 
@@ -129,6 +163,13 @@ const Login = () => {
             onChange={handleChange}
             margin="normal"
             required
+            InputProps={{
+              sx: {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: 2,
+                '&hover': { backgroundColor: 'rgba(255, 255, 255, 0.3)'}
+              }
+            }}
           />
 
           {tab === 1 && (
@@ -141,6 +182,24 @@ const Login = () => {
               onChange={handleChange}
               margin="normal"
               required
+              sx={{
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                border: '2px solid #7b1113',  
+                borderRadius: 2,
+                color: 'black',
+                fontWeight: 'bold',
+                '& .MuiInputBase-root': { 
+                  fontSize: '16px',
+                  color: '##E8E4C9',
+                  fontWeight: 'bold',
+                },
+                '& .MuiSelect-select': { 
+                  padding: '10px',
+                },
+                '&:hover': { 
+                  backgroundColor: '#E8E4C9',
+                }}
+              }
               SelectProps={{
                 native: true,
               }}
@@ -154,7 +213,15 @@ const Login = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3 }}
+            sx={{ mt: 3,
+              py: 1.5,
+              fontSize: '16px', 
+              borderRadius: 3,
+              backgroundColor: '#FFC107',
+              color: '#7b1113',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#FFD54F' },
+            }}
             disabled={loading}
           >
             {tab === 0 ? 'Login' : 'Register'}
