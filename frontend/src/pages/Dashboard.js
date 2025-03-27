@@ -47,6 +47,7 @@ const Dashboard = () => {
   const isProctor = user?.role === 'PROCTOR';
 
   const handleDelete = async (examId) => {
+    if (!window.confirm("Are you sure you want to delete this exam?")) return;
     try {
       await apiService.deleteExam(examId);
       dispatch(fetchExamsSuccess(exams.filter((e) => e.id !== examId)));

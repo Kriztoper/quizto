@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
               py: 2,
               width: '100%',
               textAlign: 'center',
-              position: 'absolute',
+              position: 'relative',
               bottom: 0,
               left: 0,
               right: 0,
