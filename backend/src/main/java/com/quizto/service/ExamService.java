@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -121,15 +122,7 @@ public class ExamService {
         var user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        // Calculate score
-        int score = 0;
-        for (Question question : exam.getQuestions()) {
-            Integer userAnswer = request.getAnswers().get(question.getId());
-            if (userAnswer != null && userAnswer == question.getCorrectChoiceIndex()) {
-                score++;
-            }
-        }
-
+        int score = calculateScore(request.getAnswers(), exam.getQuestions());
 
         // Create and save submission
         var submission = Submission.builder()
@@ -149,6 +142,17 @@ public class ExamService {
                 .score(submission.getScore())
                 .submittedAt(submission.getSubmittedAt())
                 .build();
+    }
+
+    public static int calculateScore(Map<Long, Integer> answers, List<Question> questions) {
+        int score = 0;
+        for (Question question : questions) {
+            Integer userAnswer = answers.get(question.getId());
+            if (userAnswer != null && userAnswer.equals(question.getCorrectChoiceIndex())) {
+                score++;
+            }
+        }
+        return score;
     }
 
     @Transactional
