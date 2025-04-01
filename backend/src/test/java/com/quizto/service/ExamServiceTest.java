@@ -44,7 +44,7 @@ public class ExamServiceTest {
     @Test
     public void testAllAnswersCorrect() {
         // Arrange
-        submissionRequest.getAnswers().put(1L, 1);
+        submissionRequest.getAnswers().put(1L, 0);
         submissionRequest.getAnswers().put(2L, 1);
         submissionRequest.getAnswers().put(3L, 2);
 
@@ -52,11 +52,11 @@ public class ExamServiceTest {
         int score = ExamService.calculateScore(submissionRequest.getAnswers(), exam.getQuestions());
 
         // Assert
-        assert score == 2;
+        assert score == 3;
     }
 
     @Test
-    public void testOneAnswersWrong() {
+    public void testOneAnswerWrong() {
         // Arrange
         submissionRequest.getAnswers().put(1L, 4);
         submissionRequest.getAnswers().put(2L, 1);
