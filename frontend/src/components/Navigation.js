@@ -27,6 +27,9 @@ const Navigation = () => {
               Create Exam
             </Button>
           )}
+          <Button color="inherit" onClick={() => navigate('/curriculums')}>
+            Curriculums
+          </Button>
           <Typography variant="body1" sx={{ ml: 2 }}>
             Welcome, {user?.username}
           </Typography>

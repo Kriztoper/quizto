@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import ExamCreation from './pages/ExamCreation';
 import ExamTaking from './pages/ExamTaking';
 import ExamEdit from './pages/ExamEdit';
+import Curriculums from "./pages/Curriculums";
 
 function App() {
   return (
@@ -38,6 +39,14 @@ function App() {
                 element={
                   <PrivateRoute roles={['PROCTOR']}>
                     <ExamCreation />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/curriculums"
+                element={
+                  <PrivateRoute>
+                    <Curriculums />
                   </PrivateRoute>
                 }
               />

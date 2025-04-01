@@ -49,7 +49,10 @@ const apiService = {
   updateExam: (id, examData) => api.put(`/exam/${id}`, examData),
   submitExam: (id, answers) => api.post(`/exam/${id}/submit`, {'answers': answers}),
   deleteExam: (id) => api.delete(`/exam/${id}`),
-  getLastSubmission: (id) => api.get(`/exam/${id}/last-submission`)
+  getLastSubmission: (id) => api.get(`/exam/${id}/last-submission`),
+
+  // Curriculum methods
+  getCurriculums: () => api.get(`/curriculum`),
 };
 
 export const { login, register, createExam, getExams, getExam, submitExam, deleteExam, updateExam, getLastSubmission } = apiService;
