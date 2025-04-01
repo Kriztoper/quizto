@@ -57,25 +57,6 @@ const Dashboard = () => {
     }
   };
 
-  // Helper function to calculate time ago
-  const getTimeAgo = (submittedAt) => {
-    if (!submittedAt || isNaN(Date.parse(submittedAt))) {
-      console.warn("Invalid submittedAt:", submittedAt); // ✅ Log invalid dates
-      return 'Unknown time';
-    }
-  
-    const submissionDate = new Date(submittedAt);
-    const now = new Date();
-    const diffInMinutes = Math.floor((now - submissionDate) / 60000);
-  
-    if (diffInMinutes < 1) return 'just now';
-    if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
-    const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
-    const diffInDays = Math.floor(diffInHours / 24);
-    return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
-  };  
-
   return (
     <Box sx={{ width: '100%' }}>
       {loading && (
