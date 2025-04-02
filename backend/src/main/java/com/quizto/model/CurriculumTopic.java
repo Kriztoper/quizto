@@ -6,16 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "curriculums")
-public class Curriculum {
+@Table(name = "curriculum_topics")
+public class CurriculumTopic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +20,4 @@ public class Curriculum {
 
     @Column(nullable = false)
     private String title;
-
-    private String description;
-
-    @OneToMany
-    @Builder.Default
-    @JoinColumn(name = "curriculum_id")
-    private List<CurriculumTopic> topics = new ArrayList<>();
 }

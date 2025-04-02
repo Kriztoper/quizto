@@ -26,6 +26,7 @@ public class CurriculumService {
                 .id(curriculum.getId())
                 .title(curriculum.getTitle())
                 .description(curriculum.getDescription())
+                .topics(curriculum.getTopics())
                 .build();
     }
 }
